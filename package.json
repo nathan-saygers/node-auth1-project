@@ -1,0 +1,23 @@
+{
+  "name": "auth1-project",
+  "version": "1.0.0",
+  "description": "Node.js practice",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathan-saygers/node-auth1-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathan-saygers/node-auth1-project/issues"
+  },
+  "homepage": "https://github.com/nathan-saygers/node-auth1-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "2.0.2"
+  }
+}
