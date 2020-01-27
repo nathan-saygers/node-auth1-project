@@ -7,14 +7,14 @@ module.exports = {
   hashPass
 };
 
-const authenticate = function(req, res) {
+function authenticate(req, res, next) {
   const { username, password } = req.body;
 
   if (username && password) {
     db.findUsers(username)
       .then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
-          res.status(200).json({ message: `welcome ${username}` });
+          next();
         } else {
           res.status(401).json({ message: "go away, unauthed person" });
         }
@@ -28,9 +28,9 @@ const authenticate = function(req, res) {
       .status(400)
       .json({ message: "please provide both username and password" });
   }
-};
+}
 
-const hashPass = function(req, res, next) {
+function hashPass(req, res, next) {
   const credentials = req.body;
 
   if (credentials.username && credentials.password) {
@@ -43,4 +43,4 @@ const hashPass = function(req, res, next) {
   }
 
   next();
-};
+}
