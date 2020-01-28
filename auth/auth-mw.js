@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 
-const db = require("./dbhelpers");
+const db = require("../dbhelpers");
 
 module.exports = {
   authenticate,

@@ -4,7 +4,7 @@ const server = require("./index");
 
 const db = require("./dbhelpers");
 
-const auth = require("./auth-mw");
+const auth = require("./auth/auth-mw");
 
 server.use(express.json());
 
@@ -29,14 +29,30 @@ server.post("/api/register", auth.hashPass, (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      res
-        .status(500)
-        .json({
-          message: "the server encountered an issue creating a new user"
-        });
+      res.status(500).json({
+        message: "the server encountered an issue creating a new user"
+      });
     });
 });
 
 server.post("/api/login", auth.authenticate, (req, res) => {
   res.status(200).json({ message: "Logged In" });
+});
+
+server.get("/api/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.status(500).json({
+          you: "get the heck off my lawn"
+        });
+      } else {
+        res
+          .status(200)
+          .json({ goodbye: "and thank you for coming to my lawn" });
+      }
+    });
+  } else {
+    res.status(204);
+  }
 });

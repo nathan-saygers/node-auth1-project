@@ -1,13 +1,9 @@
-const express = require("express");
-const port = process.env.PORT || 4000;
-const server = express();
-
 const helmet = require("helmet");
 const cors = require("cors");
 const session = require("express-session");
 const KnexSessionStore = require("connect-session-knex")(session);
 
-const dbConnection = require("./data/dbConfig");
+const dbConnection = require("../data/dbConfig");
 
 const sessionConfig = {
   name: "cookieMaster",
@@ -31,9 +27,3 @@ const sessionConfig = {
 server.use(helmet());
 server.use(session(sessionConfig)); // turn on sessions
 server.use(cors());
-
-server.listen(port, () => {
-  console.log(`Server now listening on ${port}`);
-});
-
-module.exports = server;
