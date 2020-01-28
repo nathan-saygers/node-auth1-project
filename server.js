@@ -8,7 +8,7 @@ const auth = require("./auth/auth-mw");
 
 server.use(express.json());
 
-server.get("/api/users", (req, res) => {
+server.get("/api/users", auth.restricted, (req, res) => {
   db.findUsers()
     .then(users => {
       console.log("these are users", users);
